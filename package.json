@@ -1,0 +1,24 @@
+{
+    "name": "node-wiki",
+    "version": "0.1.0",
+    "author": "Hannes Rosenbauer <hannes.rosenbauer@gmail.com>",
+    "description": "a wiki powered by nodejs and sqlite",
+    "main": "./index",
+    "keywords": [
+        "wiki",
+        "node-wiki"
+    ],
+    "dependencies": {
+        "express": "3.3.3",
+        "ejs-locals": "1.0.2",
+        "dblite": "0.3.6"
+    },
+    "license": "MIT",
+    "engines": {
+        "node": ">=0.6"
+    },
+    "repository" : {
+        "type": "git",
+        "url": "https://github.com/rebugger/node-wiki.git"
+    }
+}

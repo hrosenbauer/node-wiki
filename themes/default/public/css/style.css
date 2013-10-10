@@ -1,0 +1,31 @@
+body {
+	padding-top: 40px;
+	padding-bottom: 40px;
+}
+
+body, input, select, button, textarea {
+	font-family: 'PT Sans', sans-serif;
+}
+
+#edit {
+	margin-top: -10px;
+	display: none;
+}
+
+#preview {
+	display: none;
+}
+
+#preview.active, #edit.active {
+	display: block;
+}
+
+#title {
+	font-size: 36px;
+	height: 60px;
+}
+
+#content {
+	font-family: Consolas, monospace;
+	font-size: 14px;
+}
