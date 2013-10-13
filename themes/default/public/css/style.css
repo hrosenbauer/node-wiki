@@ -1,23 +1,9 @@
 body {
-	padding-top: 40px;
 	padding-bottom: 40px;
 }
 
 body, input, select, button, textarea {
 	font-family: 'PT Sans', sans-serif;
-}
-
-#edit {
-	margin-top: -10px;
-	display: none;
-}
-
-#preview {
-	display: none;
-}
-
-#preview.active, #edit.active {
-	display: block;
 }
 
 #title {
@@ -28,4 +14,16 @@ body, input, select, button, textarea {
 #content {
 	font-family: Consolas, monospace;
 	font-size: 14px;
+}
+
+#editor .page-header {
+	margin-top: 0;
+}
+
+#editor > .modal-dialog {
+	width: 85%;
+}
+
+#editor .body {
+	overflow: auto;
 }

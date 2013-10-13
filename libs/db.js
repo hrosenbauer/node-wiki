@@ -22,7 +22,7 @@ exports.setup = function () {
 // get article from database
 exports.read = function (id, callback) {
 	id = exports.id(id);
-	
+
 	db.query('SELECT * FROM articles WHERE id = ?', [ id ], {
 		id: String,
 		title: String,

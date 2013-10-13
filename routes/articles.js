@@ -19,7 +19,7 @@ exports.view = function (req, res) {
 		if (empty) {
 			article = {
 				id: id,
-				title: '',
+				title: 'Page not found',
 				content: ''
 			};
 		}

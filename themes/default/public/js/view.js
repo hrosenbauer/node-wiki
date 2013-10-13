@@ -1,56 +1,65 @@
 (function () {
-	var $preview = $('#preview'),
-		$edit = $('#edit'),
-		$tabs = $('#tabs'),
-		$title = $('#title'),
-		$content = $('#content'),
-		$pTitle = $('#preview-title'),
-		$pContent = $('#preview-content'),
-		$save = $('#save');
+	var $content = $('#content');
+	var $articleBody = $('#article > .body');
+	var $preview = $('#preview');
+	var $render = $('#editor .body');
+	var $title = $('#title');
+	var $editor = $('#editor');
 
-	// check save button on change
-	function checkSave() {
-		function id(title) {
-			var id = title.trim().toLowerCase();
-			id = id.replace(/\s+/g, '-');
-			id = id.replace(/[^a-zA-Z0-9\-]/g, '');
-			return id;
-		};
+	// initialize
+	var markdown = $content.val();
+	var html = marked(markdown);
+	$articleBody.html(html);
 
-		$save.prop('disabled', id($title.val()) === '');
+	function showMarkup() {
+		$render.hide();
+		$content.show();
+		$preview.children('span')
+			.removeClass('glyphicon-eye-close')
+			.addClass('glyphicon-eye-open');
 	}
-	$title.on({
-		keyup: checkSave,
-		change: checkSave
+
+	function showPreview() {
+		$content.hide();
+		var markdown = $content.val();
+		var html = marked(markdown);
+		$render.height($content.height())
+			.html(html)
+			.show();
+		$preview.children('span')
+			.removeClass('glyphicon-eye-open')
+			.addClass('glyphicon-eye-close');
+	}
+
+
+	var oldTitle, oldContent;
+	$editor.on('show.bs.modal', function () {
+		// reset title on edit
+		if (!oldTitle) {
+			oldTitle = $title.val();
+		}
+		else {
+			$title.val(oldTitle);
+		}
+
+		// reset content on edit
+		if (!oldContent) {
+			oldContent = $content.val();
+		}
+		else {
+			$content.val(oldContent);
+		}
+
+		showMarkup();
 	});
 
-	// render markdown
-	function render() {
-		var markdown = $content.val(),
-			title = $title.val(),
-			html = marked(markdown);
-
-		$pTitle.text(title);
-		$pContent.html(html);
-	}
-	render();
-
-	// tabs
-	$tabs.on('click', 'li', function (ev) {
-		ev.preventDefault();
-
-		$tabs.children('li.active').removeClass('active');
-		var tab = $(this).addClass('active').data('tab');
-
-		switch(tab) {
-			case 'edit':
-				$preview.removeClass('active');
-				$edit.addClass('active');
-			break;
-			default:
-				render();
-				$edit.removeClass('active');
-				$preview.addClass('active');
+	// preview edited article
+	$preview.click(function () {
+		if ($render.is(':hidden')) {
+			showPreview();
+		}
+		else {
+			showMarkup();
 		}
 	});
 })();
