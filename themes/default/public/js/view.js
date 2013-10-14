@@ -5,6 +5,7 @@
 	var $render = $('#editor .body');
 	var $title = $('#title');
 	var $editor = $('#editor');
+	var $body = $('body');
 
 	// initialize
 	var markdown = $content.val();
@@ -21,8 +22,10 @@
 
 	function showPreview() {
 		$content.hide();
+
 		var markdown = $content.val();
 		var html = marked(markdown);
+
 		$render.height($content.height())
 			.html(html)
 			.show();
@@ -51,6 +54,14 @@
 		}
 
 		showMarkup();
+	});
+
+	// remove scrollbars from body
+	$body.on('show.bs.modal', function () {
+		$body.addClass('modal-open');
+	});
+	$body.on('hidden.bs.modal', function () {
+		$body.removeClass('modal-open');
 	});
 
 	// preview edited article

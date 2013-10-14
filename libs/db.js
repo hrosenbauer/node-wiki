@@ -10,6 +10,7 @@ db = dblite(config.file);
 exports.id = function (title) {
 	var id = title.trim().toLowerCase();
 	id = id.replace(/\s+/g, '-');
+	id = id.replace(/\-{2,}/g, '-');
 	id = id.replace(/[^a-zA-Z0-9\-]/g, '');
 	return id;
 };

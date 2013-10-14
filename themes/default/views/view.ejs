@@ -5,32 +5,31 @@
 
 <% block('title', article.title) -%>
 
-
+<!-- article -->
 <div class="container">
     <div id="article">
         <div class="page-header">
-            <h1 class="title">
-                <%= article.title %>
-                <% if (!empty) { %>
-                    <div class="btn-group pull-right">
-                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                            <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a data-toggle="modal" href="#editor">Edit</a></li>
-                            <li><a data-toggle="modal" href="#remove">Remove</a></li>
-                        </ul>
-                    </div>
-                <% } else { %>
-                    <a data-toggle="modal" href="#editor" class="btn btn-primary pull-right">Create</a>
-                <% } %>
-            </h1>
+            <% if (!empty) { %>
+                <div class="btn-group pull-right">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                        <span class="glyphicon glyphicon-cog"></span> <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a data-toggle="modal" href="#editor">Edit</a></li>
+                        <li><a data-toggle="modal" href="#remove">Remove</a></li>
+                    </ul>
+                </div>
+            <% } else { %>
+                <a data-toggle="modal" href="#editor" class="btn btn-primary pull-right">Create</a>
+            <% } %>
+
+            <h1 class="title"><a href="/<%= article.title %>"><%= article.title %></a></h1>
         </div>
         <div class="body"></div>
     </div>
 </div>
 
-
+<!-- edit dialog -->
 <form role="form" method="post" action="/<%= article.id %>/edit">
     <input type="hidden" name="_csrf" value="<%- csrf %>">
     <div class="modal fade" id="editor" tabindex="-1" role="dialog" aria-labelledby="editor" aria-hidden="true">
@@ -59,7 +58,7 @@
     </div>
 </form>
 
-
+<!-- remove dialog -->
 <form role="form" method="post" action="/<%= article.id %>/delete">
 	<input type="hidden" name="_csrf" value="<%- csrf %>">
 	<div class="modal fade" id="remove" tabindex="-1" role="dialog" aria-labelledby="remove" aria-hidden="true">

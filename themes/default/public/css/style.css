@@ -1,14 +1,16 @@
+@import url(http://fonts.googleapis.com/css?family=PT+Sans|Droid+Serif|Droid+Sans:400,700);
+
 body {
 	padding-bottom: 40px;
 }
 
 body, input, select, button, textarea {
-	font-family: 'PT Sans', sans-serif;
+	font-family: 'PT Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
 #title {
-	font-size: 36px;
 	height: 60px;
+	font-size: 36px;
 }
 
 #content {
@@ -21,9 +23,41 @@ body, input, select, button, textarea {
 }
 
 #editor > .modal-dialog {
-	width: 85%;
+	width: 95%;
+	height: 95%;
 }
 
 #editor .body {
 	overflow: auto;
+}
+
+#article .body,
+#article .body h1,
+#article .body h2,
+#article .body h3,
+#article .body h4,
+#editor .body,
+#editor .body h1,
+#editor .body h2,
+#editor .body h3,
+#editor .body h4 {
+	font-family: 'Droid Serif', serif;
+	line-height: 1.8;
+}
+
+#article .body pre code,
+#editor .body pre code {
+	font-size: 12pt;
+}
+
+#article .body,
+#editor .body {
+	font-size: 16pt;
+	line-height: 1.45;
+}
+
+#article .title,
+#title {
+	font-family: 'Droid Sans', sans-serif;
+	font-weight: 700;
 }
