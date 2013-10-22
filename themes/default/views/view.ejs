@@ -3,7 +3,7 @@
 <% script('/js/marked.js') -%>
 <% script('/js/view.js') -%>
 
-<% block('title', article.title) -%>
+<% block('title', empty ? 'Page not found' : article.title) -%>
 
 <!-- article -->
 <div class="container">
