@@ -22,8 +22,13 @@
             <% } else { %>
                 <a data-toggle="modal" href="#editor" class="btn btn-primary pull-right">Create</a>
             <% } %>
-
-            <h1 class="title"><a href="/<%= article.title %>"><%= article.title %></a></h1>
+            <h1 class="title">
+                <% if (!empty) { %>
+                    <a href="/<%= article.title %>"><%= article.title %></a>
+                <% } else { %>
+                    Page not found
+                <% } %>
+            </h1>
         </div>
         <div class="body"></div>
     </div>

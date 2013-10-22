@@ -1,15 +1,16 @@
+/*global marked:false */
 (function () {
-	var $content = $('#content');
-	var $articleBody = $('#article > .body');
-	var $preview = $('#preview');
-	var $render = $('#editor .body');
-	var $title = $('#title');
-	var $editor = $('#editor');
-	var $body = $('body');
+	var $content = $('#content'),
+		$articleBody = $('#article > .body'),
+		$preview = $('#preview'),
+		$render = $('#editor .body'),
+		$title = $('#title'),
+		$editor = $('#editor'),
+		oldTitle, oldContent;
 
 	// initialize
-	var markdown = $content.val();
-	var html = marked(markdown);
+	var markdown = $content.val(),
+		html = marked(markdown);
 	$articleBody.html(html);
 
 	function showMarkup() {
@@ -23,8 +24,8 @@
 	function showPreview() {
 		$content.hide();
 
-		var markdown = $content.val();
-		var html = marked(markdown);
+		var markdown = $content.val(),
+			html = marked(markdown);
 
 		$render.height($content.height())
 			.html(html)
@@ -34,8 +35,6 @@
 			.addClass('glyphicon-eye-close');
 	}
 
-
-	var oldTitle, oldContent;
 	$editor.on('show.bs.modal', function () {
 		// reset title on edit
 		if (!oldTitle) {
@@ -54,14 +53,6 @@
 		}
 
 		showMarkup();
-	});
-
-	// remove scrollbars from body
-	$body.on('show.bs.modal', function () {
-		$body.addClass('modal-open');
-	});
-	$body.on('hidden.bs.modal', function () {
-		$body.removeClass('modal-open');
 	});
 
 	// preview edited article

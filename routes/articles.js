@@ -1,25 +1,30 @@
 var path = require('path'),
-	db = require(path.join(__dirname, '..', 'libs', 'db')),
+    db = require(path.join(__dirname, '..', 'libs', 'db')),
 	config = require(path.join(__dirname, '..', 'config')).wiki;
 
 exports.index = function (req, res) {
 	res.redirect('/' + config.startpage);
 };
 
-exports.view = function (req, res) {
-	var id = db.id(req.params.id);
+exports.id = function (req, res, next) {
+    var urlId = req.param('id'),
+        id = db.id(urlId);
 
-	// make sure url is valid
-	if (id !== req.params.id)
-		res.redirect('/' + id);
+    if (urlId !== id)
+        return res.redirect('/' + id);
+
+    next();
+};
+
+exports.view = function (req, res) {
+	var id = req.param('id');
 
 	db.read(id, function (article) {
-		var empty = !article;
-
+        var empty = !article;
 		if (empty) {
 			article = {
 				id: id,
-				title: 'Page not found',
+				title: '',
 				content: ''
 			};
 		}
@@ -33,18 +38,18 @@ exports.view = function (req, res) {
 
 exports.update = function (req, res) {
 	var article = {
-		id: req.params.id,
-		title: req.body.title,
-		content: req.body.content
+		id: req.param('id'),
+		title: req.param('title'),
+		content: req.param('content')
 	};
 
-	db.store(article, function (id) {
-		res.redirect('/' + id);
+	db.store(article, function (article) {
+		res.redirect('/' + article.id);
 	});
 };
 
 exports.remove = function (req, res) {
-	db.remove(req.params.id);
+	db.remove(req.param('id'));
 	res.redirect('/');
 };
 

@@ -48,9 +48,9 @@ app.configure(function () {
 // page routes
 var routes = require(path.join(__dirname, 'routes', 'articles'));
 app.get('/', routes.index);
-app.get('/:id', routes.view);
-app.post('/:id/edit', routes.update);
-app.post('/:id/delete', routes.remove);
+app.get('/:id', routes.id, routes.view);
+app.post('/:id/edit', routes.id, routes.update);
+app.post('/:id/delete', routes.id, routes.remove);
 
 // bind app to specific address and port
 app.listen(config.app.port, config.app.host, function () {

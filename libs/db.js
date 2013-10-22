@@ -36,19 +36,13 @@ exports.read = function (id, callback) {
 
 // update or insert article to database
 exports.store = function (article, callback) {
-	var id = exports.id(article.title);
-
-	if (article.id && article.id !== id)
-		exports.remove(article.id);
-
-	db.query('INSERT OR REPLACE INTO articles (id, title, content, created) VALUES (?, ?, ?, strftime("%s", "now"))', [ id, article.title, article.content ]);
-	callback(id);
+	db.query('INSERT OR REPLACE INTO articles (id, title, content, created) VALUES (?, ?, ?, strftime("%s", "now"))', [ article.id, article.title, article.content ]);
+	callback(article);
 };
 
 // remove article from database
 exports.remove = function (id) {
 	id = exports.id(id);
-
 	db.query('DELETE FROM articles where id = ?', [ id ]);
 };
 
